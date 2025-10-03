@@ -2,8 +2,8 @@ import React from "react";
 import styles from "../styles/ItemCard.module.css";
 import {useValue} from "../itemContext";
 
-function ItemCard({ name, price }) {
-  const {  handleAdd, handleRemove } = useValue();
+function ItemCard({ id, name, price }) {
+  const {  handleAdd, handleRemove, cart } = useValue();
   // const handleAdd = (price) => {
   //   setTotal(total + price);
   //   setItem(item + 1);
@@ -23,12 +23,17 @@ function ItemCard({ name, price }) {
       <div className={styles.itemName}>{name}</div>
       <div className={styles.itemPrice}>&#x20B9; {price}</div>
       <div className={styles.itemButtonsWrapper}>
-        <button className={styles.itemButton} onClick={() => handleAdd(price)}>
+        <button className={styles.itemButton} onClick={() => handleAdd({id,name, price})}>
           Add
         </button>
-        <button className={styles.itemButton} onClick={() => handleRemove(price)}>
+        {
+          cart.find((p) => p.id === id) && cart.find((p) => p.id === id).qty > 0 ? (
+           <button className={styles.itemButton} onClick={() => handleRemove({id,name, price})}>
           Remove
         </button>
+          ) : ""
+        }
+        
       </div>
     </div>
   );

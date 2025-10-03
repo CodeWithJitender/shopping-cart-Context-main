@@ -8,7 +8,7 @@ function Items() {
   return (
     <div className={styles.wrapper}>
       {items.map(item => (
-        <ItemCard key={item.id} name={item.name} price={item.price} />
+        <ItemCard key={item.id} id={item.id} name={item.name} price={item.price} />
       ))}
     </div>
   );
